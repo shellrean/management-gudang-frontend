@@ -21,13 +21,13 @@
                           </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                          <tr>
+                          <tr v-for="(barang, index) in barangs" :key="barang.id">
                             <td class="px-6 py-4 whitespace-nowrap">
-                              <div class="text-sm text-gray-900">Setrika E200</div>
-                              <div class="text-sm text-gray-500">Elektronik</div>
+                              <div class="text-sm text-gray-900">{{  barang.nama }}</div>
+                              <div class="text-sm text-gray-500">{{ barang.categori }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                              <div class="text-sm text-gray-900">20 Kg</div>
+                              <div class="text-sm text-gray-900">{{  barang.berat }} Kg</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                               <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a> |
@@ -53,3 +53,28 @@
     </div>
     </div>
 </template>
+<script>
+import { mapState, mapActions } from 'vuex';
+export default {
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapState('barang', ['barangs'])
+  },
+  methods: {
+    ...mapActions('barang', ['getAllBarang']),
+    async _getAllBarang() {
+      try {
+        await this.getAllBarang()
+      } catch (e) {
+      }
+    }
+  },
+  created() {
+    this._getAllBarang()
+  }
+}
+</script>
