@@ -30,8 +30,8 @@
                               <div class="text-sm text-gray-900">{{  barang.berat }} Kg</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a> |
-                              <a href="#" class="text-indigo-600 hover:text-indigo-900">Hapus</a>
+                              <a href="#" @click.prevent="_toEditBarang(index)" class="text-indigo-600 hover:text-indigo-900">Edit</a> |
+                              <a href="#" @click.prevent="_deleteBarang(barang.id)" class="text-indigo-600 hover:text-indigo-900">Hapus</a>
                             </td>
                           </tr>
                         </tbody>
@@ -46,9 +46,9 @@
     </div>
     <div class="mt-2">
         <div class="max-w-3xl mx-auto">
-            <a href="add_barang.html" class="shadow bg-white border block border-gray-300 text-gray-900 py-2 text-center rounded-md text-sm font-medium">
+            <router-link :to="{ name: 'barang.new' }" class="shadow bg-white border block border-gray-300 text-gray-900 py-2 text-center rounded-md text-sm font-medium">
                 Tambah barang
-            </a>
+            </router-link>
         </div>
     </div>
     </div>
@@ -65,10 +65,24 @@ export default {
     ...mapState('barang', ['barangs'])
   },
   methods: {
-    ...mapActions('barang', ['getAllBarang']),
+    ...mapActions('barang', ['getAllBarang', 'deleteBarang']),
     async _getAllBarang() {
       try {
         await this.getAllBarang()
+      } catch (e) {
+      }
+    },
+    _toEditBarang(index) {
+      this.$store.commit('barang/_assign_barang_form', this.barangs[index])
+      this.$router.push({ name: 'barang.update' })
+    },
+    async _deleteBarang(id) {
+      if(!confirm('Barang ini ingin dihapus?')) {
+        return false;
+      }
+      try {
+        await this.deleteBarang(id)
+        this._getAllBarang()
       } catch (e) {
       }
     }

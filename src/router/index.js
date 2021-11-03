@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 import Barang from '../views/barang/Barang.vue'
+import NewBarang from '../views/barang/New.vue'
+import UpdateBarang from '../views/barang/Update.vue'
 
 import Pengirim from '../views/pengirim/Pengirim.vue'
 
@@ -18,6 +20,16 @@ const routes = [
     path: '/barang',
     name: 'barang.index',
     component: Barang
+  },
+  {
+    path: '/barang/new',
+    name: 'barang.new',
+    component: NewBarang
+  },
+  {
+    path: '/barang/update',
+    name: 'barang.update',
+    component: UpdateBarang
   },
   {
     path: '/pengirim',
