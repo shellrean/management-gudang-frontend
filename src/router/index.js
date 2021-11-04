@@ -7,6 +7,8 @@ import NewBarang from '../views/barang/New.vue'
 import UpdateBarang from '../views/barang/Update.vue'
 
 import Pengirim from '../views/pengirim/Pengirim.vue'
+import NewPengirim from '../views/pengirim/New.vue'
+import UpdatePengirim from '../views/pengirim/Update.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,16 @@ const routes = [
     path: '/pengirim',
     name: 'pengirim.index',
     component: Pengirim
+  },
+  {
+    path: '/pengirim/new',
+    name: 'pengirim.new',
+    component: NewPengirim
+  },
+  {
+    path: '/pengirim/update',
+    name: 'pengirim.update',
+    component: UpdatePengirim
   }
 ]
 
