@@ -10,6 +10,8 @@ import Pengirim from '../views/pengirim/Pengirim.vue'
 import NewPengirim from '../views/pengirim/New.vue'
 import UpdatePengirim from '../views/pengirim/Update.vue'
 
+import FormShip from '../views/ship/Form.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +49,11 @@ const routes = [
     path: '/pengirim/update',
     name: 'pengirim.update',
     component: UpdatePengirim
+  },
+  {
+    path: '/ship/:tipe',
+    name: 'ship.form',
+    component: FormShip
   }
 ]
 
