@@ -2,12 +2,16 @@ import $http from '../services/api.service'
 
 const state = () => ({
     shippers: [],
-    shipper: {}
+    shipper: {},
+    shippings: []
 })
 
 const mutations = {
     _assign_shippers_data(state, shippers) {
         state.shippers = shippers
+    },
+    _assign_shippings_data(state, shippings) {
+        state.shippings = shippings
     }
 }
 
@@ -15,7 +19,8 @@ const actions = {
     getAllShipper,
     newShipper,
     updateShipper,
-    deleteShipper
+    deleteShipper,
+    getShippingShipper
 }
 
 export default {
@@ -66,6 +71,19 @@ function deleteShipper({ commit }, shipperId) {
     return new Promise(async (resolve, reject) => {
         try {
             let network = await $http.delete('http://localhost:8080/api/shipper/'+shipperId)
+            resolve(network.data)
+        } catch (e) {
+            console.error(e)
+            reject(e)
+        }
+    })
+}
+
+function getShippingShipper({ commit }, shipperId) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let network = await $http.get('http://localhost:8080/api/shipper/'+shipperId+'/shipping')
+            commit('_assign_shippings_data', network.data)
             resolve(network.data)
         } catch (e) {
             console.error(e)

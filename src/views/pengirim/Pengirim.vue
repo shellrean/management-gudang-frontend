@@ -24,6 +24,7 @@
                               <div class="text-sm text-gray-500">{{  shipper.codeShipper }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                              <a href="#" @click.prevent="_showPengirimanShipper(shipper.id)" class="text-indigo-600 hover:text-indigo-900">Pengiriman</a> |
                               <a href="#" @click.prevent="_editShipper(index)" class="text-indigo-600 hover:text-indigo-900">Edit</a> |
                               <a href="#" @click.prevent="_deleteShipper(shipper.id)" class="text-indigo-600 hover:text-indigo-900">Hapus</a>
                             </td>
@@ -71,6 +72,9 @@ export default {
     _editShipper(index) {
       this.$store.state.pengirim.shipper = this.shippers[index]
       this.$router.push({ name: 'pengirim.update' })
+    },
+    _showPengirimanShipper(id) {
+      this.$router.push({ name: 'pengirim.shipping', params: { id: id }})
     },
     async _deleteShipper(id) {
       if(!confirm("Apakah anda yakin?")) {
